@@ -22,15 +22,11 @@ public:
     Buffer(int size): size_(size), finish_time_() {}
     
     Response Process(const Request &request) {
-        
         Response myResponse(false, 0);
-
         while(!finish_time_.empty() && finish_time_.front() <= request.arrival_time){
             finish_time_.pop_front();
         }
-        
         if (finish_time_.size() < size_){
-        
             if (!finish_time_.empty()){
                 myResponse.start_time = finish_time_.back();
                 finish_time_.push_back(finish_time_.back() + request.process_time);
@@ -43,8 +39,7 @@ public:
         else {
             myResponse.dropped = true;
         }
-        printf("\n");
-        
+        printf("\n");        
         return myResponse;
     }
     
